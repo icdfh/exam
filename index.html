@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Экзамен по ИИ и большим данным</title>
+    <style>
+   body {
+    font-family: 'Poppins', sans-serif;
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb, #a1c4fd, #c2e9fb);
+    color: #333;
+    border-radius: 25px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    animation: bodyFadeIn 2s ease-in-out;
+}
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    font-size: 3.5em;
+    margin-bottom: 30px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    animation: titleBounce 1.5s ease-in-out;
+}
+
+h2 {
+    color: #34495e;
+    font-size: 2.2em;
+    margin-top: 40px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 1s ease-in-out;
+}
+
+.form-group, .question, .task {
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-size: 1.4em;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.options {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.options input {
+    margin-right: 15px;
+    transform: scale(1.5);
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+.task .instructions {
+    background: linear-gradient(135deg, #f3f4f6, #eef2f3);
+    padding: 25px;
+    border-radius: 15px;
+    border-left: 8px solid #3498db;
+    font-family: 'Courier New', monospace;
+    box-shadow: inset 0 6px 8px rgba(0, 0, 0, 0.15);
+    font-size: 1.1em;
+}
+
+.task textarea {
+    width: calc(100% - 20px);
+    height: 200px;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    resize: vertical;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 1.1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #43cea2, #185a9d, #36d1dc, #5b86e5);
+    color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    transition: background 0.4s, transform 0.4s, box-shadow 0.4s;
+    animation: buttonPop 1.5s ease-in-out;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #36d1dc, #5b86e5, #2ecc71);
+    transform: translateY(-7px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+}
+
+.timer {
+    font-size: 28px;
+    color: #e74c3c;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 15px;
+    margin-top: 10px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.15);
+    font-size: 1.2em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 12px rgba(52, 152, 219, 0.6);
+}
+
+input[type="radio"] {
+    margin-top: 15px;
+    cursor: pointer;
+    accent-color: #3498db;
+}
+
+#startButton {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #2980b9, #6dd5fa, #3498db, #2ecc71);
+    color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    transition: background 0.4s, transform 0.4s, box-shadow 0.4s;
+    animation: buttonPop 1.5s ease-in-out;
+}
+
+#startButton:hover {
+    background: linear-gradient(135deg, #3498db, #2ecc71, #6dd5fa);
+    transform: translateY(-7px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
+    button, #startButton {
+        font-size: 20px;
+    }
+
+    h1 {
+        font-size: 3em;
+    }
+
+    h2 {
+        font-size: 1.9em;
+    }
+
+    .task textarea {
+        height: 150px;
+    }
+}
+
+
+@keyframes bodyFadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes titleBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes buttonPop {
+    0% { transform: scale(0.9); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Adding subtle animations to form elements */
+.form-group, .question, .task {
+    transition: all 0.5s ease;
+}
+
+.form-group:hover, .question:hover, .task:hover {
+    transform: scale(1.02);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+}
+
+
+    </style>
+  
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body>
+    <h1>Экзамен по ИИ и большим данным</h1>
+    <div class="grading-criteria">
+        <h2>Критерии оценивания</h2>
+        <p><strong>Общая оценка:</strong> максимальный балл - 12</p>
+        <ul>
+            <li>Тестовые вопросы: 9 баллов
+                <ul>
+                    <li>30 вопросов, каждый правильный ответ даёт <strong>0.3 балла</strong></li>
+                </ul>
+            </li>
+            <li>Практические задания: 3 балла
+                <ul>
+                    <li>Каждое задание оценивается в <strong>1 балл</strong></li>
+                </ul>
+            </li>
+        </ul>
+        <p><em>Максимально возможный балл за экзамен: <strong>12</strong></em></p>
+    </div>
+    
+
+    <div id="timer" class="timer">Время: 02:00:00</div>
+    
+   
+    <button id="startButton" onclick="startExam()">Старт экзамена</button>
+
+   
+    <form id="examForm" style="display: none;">
+        
+      
+        <div class="form-group">
+            <label for="studentName">Имя студента:</label>
+            <input type="text" id="studentName" name="studentName" required>
+        </div>
+
+        <div class="question">
+            <label>1. Что такое искусственный интеллект?</label>
+            <div class="options">
+                <input type="radio" name="question1" value="a" required> a) Программа, которая может учиться<br>
+                <input type="radio" name="question1" value="b"> b) Способность человека думать<br>
+                <input type="radio" name="question1" value="c"> c) Сеть интернета<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>2. Какую задачу может решать искусственный интеллект?</label>
+            <div class="options">
+                <input type="radio" name="question2" value="a" required> a) Только играть в игры<br>
+                <input type="radio" name="question2" value="b"> b) Анализировать данные и находить решения<br>
+                <input type="radio" name="question2" value="c"> c) Работать только с текстами<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>3. Что такое данные?</label>
+            <div class="options">
+                <input type="radio" name="question3" value="a" required> a) Любая информация, которую можно использовать<br>
+                <input type="radio" name="question3" value="b"> b) Только цифры<br>
+                <input type="radio" name="question3" value="c"> c) Компьютерные программы<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>4. Что значит "обучение с учителем"?</label>
+            <div class="options">
+                <input type="radio" name="question4" value="a" required> a) ИИ работает с учителем<br>
+                <input type="radio" name="question4" value="b"> b) ИИ учится на примерах<br>
+                <input type="radio" name="question4" value="c"> c) ИИ обучается с помощью музыки<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>5. Могут ли компьютеры обучаться на своих ошибках?</label>
+            <div class="options">
+                <input type="radio" name="question5" value="a" required> a) Да, с помощью алгоритмов<br>
+                <input type="radio" name="question5" value="b"> b) Нет, компьютеры не ошибаются<br>
+                <input type="radio" name="question5" value="c"> c) Только с помощью игр<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>6. Что такое "большие данные"?</label>
+            <div class="options">
+                <input type="radio" name="question6" value="a" required> a) Только большие числа<br>
+                <input type="radio" name="question6" value="b"> b) Множество различных данных<br>
+                <input type="radio" name="question6" value="c"> c) Файлы для компьютера<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>7. Где используется компьютерное зрение?</label>
+            <div class="options">
+                <input type="radio" name="question7" value="a" required> a) В распознавании лиц<br>
+                <input type="radio" name="question7" value="b"> b) В текстовых документах<br>
+                <input type="radio" name="question7" value="c"> c) Только в интернете<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>8. Как ИИ распознает изображение?</label>
+            <div class="options">
+                <input type="radio" name="question8" value="a" required> a) Путем анализа пикселей<br>
+                <input type="radio" name="question8" value="b"> b) С помощью звуков<br>
+                <input type="radio" name="question8" value="c"> c) Через веб-камеру<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>9. Что такое линейная регрессия?</label>
+            <div class="options">
+                <input type="radio" name="question9" value="a" required> a) Метод для предсказания, основанный на данных<br>
+                <input type="radio" name="question9" value="b"> b) Программа для анализа текстов<br>
+                <input type="radio" name="question9" value="c"> c) Программа для рисования<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>10. Где используется линейная регрессия?</label>
+            <div class="options">
+                <input type="radio" name="question10" value="a" required> a) В прогнозе погоды<br>
+                <input type="radio" name="question10" value="b"> b) В спорте<br>
+                <input type="radio" name="question10" value="c"> c) Только в играх<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>11. Что такое numpy?</label>
+            <div class="options">
+                <input type="radio" name="question11" value="a" required> a) Библиотека для работы с таблицей<br>
+                <input type="radio" name="question11" value="b"> b) Библиотека для обучения модели<br>
+                <input type="radio" name="question11" value="c"> c) Библиотека для работы с цифрами<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>12. Какую задачу решает логистическая регрессия?</label>
+            <div class="options">
+                <input type="radio" name="question12" value="a" required> a) Помогает классифицировать данные<br>
+                <input type="radio" name="question12" value="b"> b) Используется только в играх<br>
+                <input type="radio" name="question12" value="c"> c) Измеряет рост растений<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>13. Почему ИИ может быть полезен в медицине?</label>
+            <div class="options">
+                <input type="radio" name="question13" value="a" required> a) Может помочь в диагностике болезней<br>
+                <input type="radio" name="question13" value="b"> b) Управляет медицинскими записями<br>
+                <input type="radio" name="question13" value="c"> c) Используется для написания текстов<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>14. Что такое matplotlib?</label>
+            <div class="options">
+                <input type="radio" name="question14" value="a" required> a) Библиотека для работы с таблицей<br>
+                <input type="radio" name="question14" value="b"> b) Библиотека для работы с графиком<br>
+                <input type="radio" name="question14" value="c"> c) Библиотека для работы с цифрами<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>15. Чем ИИ отличается от обычного компьютера?</label>
+            <div class="options">
+                <input type="radio" name="question15" value="a" required> a) Он может учиться и делать выводы<br>
+                <input type="radio" name="question15" value="b"> b) Он быстрее работает<br>
+                <input type="radio" name="question15" value="c"> c) Он не нуждается в данных<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>16. Как компьютерное зрение помогает автомобилям?</label>
+            <div class="options">
+                <input type="radio" name="question16" value="a" required> a) Позволяет автомобилям "видеть" дорогу<br>
+                <input type="radio" name="question16" value="b"> b) Управляет мотором автомобиля<br>
+                <input type="radio" name="question16" value="c"> c) Воспроизводит музыку в машине<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>17. Какую информацию использует компьютерное зрение?</label>
+            <div class="options">
+                <input type="radio" name="question17" value="a" required> a) Цвета и формы объектов<br>
+                <input type="radio" name="question17" value="b"> b) Только текстовые данные<br>
+                <input type="radio" name="question17" value="c"> c) Только музыку<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>18. Как линейная регрессия используется для прогнозов?</label>
+            <div class="options">
+                <input type="radio" name="question18" value="a" required> a) Она предсказывает значения на основе предыдущих данных<br>
+                <input type="radio" name="question18" value="b"> b) Создает случайные данные<br>
+                <input type="radio" name="question18" value="c"> c) Она рисует изображения<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>19. Что делает model = LinearRegression()?</label>
+            <div class="options">
+                <input type="radio" name="question19" value="a" required> a) Обучение модели<br>
+                <input type="radio" name="question19" value="b"> b) Создание модели<br>
+                <input type="radio" name="question19" value="c"> c) Алгоритм предсказания<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>20. Как компьютерное зрение "узнает" лица?</label>
+            <div class="options">
+                <input type="radio" name="question20" value="a" required> a) Анализирует черты лица и пиксели<br>
+                <input type="radio" name="question20" value="b"> b) Смотрит видео<br>
+                <input type="radio" name="question20" value="c"> c) Использует текстовые данные<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>21. Чем полезен ИИ в распознавании голоса?</label>
+            <div class="options">
+                <input type="radio" name="question21" value="a" required> a) Может "понимать" и распознавать речь<br>
+                <input type="radio" name="question21" value="b"> b) Управляет громкостью<br>
+                <input type="radio" name="question21" value="c"> c) Только записывает звук<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>22. Где применяют логистическую регрессию?</label>
+            <div class="options">
+                <input type="radio" name="question22" value="a" required> a) В медицинских анализах для классификации<br>
+                <input type="radio" name="question22" value="b"> b) В играх<br>
+                <input type="radio" name="question22" value="c"> c) Только для текста<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>23. Что нужно для построения модели линейной регрессии?</label>
+            <div class="options">
+                <input type="radio" name="question23" value="a" required> a) Данные и график<br>
+                <input type="radio" name="question23" value="b"> b) Только текстовые данные<br>
+                <input type="radio" name="question23" value="c"> c) Программа для рисования<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>24. Как ИИ может предсказать, что будет популярно в интернете?</label>
+            <div class="options">
+                <input type="radio" name="question24" value="a" required> a) Анализируя прошлые данные<br>
+                <input type="radio" name="question24" value="b"> b) Читая новости<br>
+                <input type="radio" name="question24" value="c"> c) Сравнивая видео<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>25. Дайте определение фильтру Собеля:</label>
+            <div class="options">
+                <input type="text" name="question25" required placeholder="Введите ваше определение здесь"><br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>26. Как линейная регрессия может помочь в спорте?</label>
+            <div class="options">
+                <input type="radio" name="question26" value="a" required> a) Прогнозировать результаты, например, на основе тренировок<br>
+                <input type="radio" name="question26" value="b"> b) Только для анализа текста<br>
+                <input type="radio" name="question26" value="c"> c) Работает только с изображениями<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>27. Как ИИ распознает объекты в игре?</label>
+            <div class="options">
+                <input type="radio" name="question27" value="a" required> a) Использует алгоритмы и пиксели<br>
+                <input type="radio" name="question27" value="b"> b) Просто "угадывает"<br>
+                <input type="radio" name="question27" value="c"> c) Только анализирует звук<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>28. Как нейронные сети помогают ИИ учиться?</label>
+            <div class="options">
+                <input type="radio" name="question28" value="a" required> a) Похожи на связи в мозге, что помогает анализировать данные<br>
+                <input type="radio" name="question28" value="b"> b) Работают как калькулятор<br>
+                <input type="radio" name="question28" value="c"> c) Используют звуки<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>29. Как логистическая регрессия работает с "да" и "нет" ответами?</label>
+            <div class="options">
+                <input type="radio" name="question29" value="a" required> a) Прогнозирует вероятность "да" или "нет"<br>
+                <input type="radio" name="question29" value="b"> b) Только анализирует текст<br>
+                <input type="radio" name="question29" value="c"> c) Создает новые данные<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>30. Чем компьютерное зрение полезно для безопасности?</label>
+            <div class="options">
+                <input type="radio" name="question30" value="a" required> a) Помогает распознавать лица и предметы<br>
+                <input type="radio" name="question30" value="b"> b) Запоминает текст<br>
+                <input type="radio" name="question30" value="c"> c) Сравнивает документ<br>
+            </div>
+        </div>
+        
+
+       
+        <h2>Практическое задание 1</h2>
+        <div class="task">
+            <div class="instructions">
+                <p># Импортируем необходимые библиотеки<br>
+                from sklearn.linear_model import LinearRegression<br>
+                import numpy as np<br>
+                <br>
+                # Данные для обучения модели (например, время, проведенное на учебе и полученные оценки)<br>
+                # Независимая переменная (время на учебу, часы)<br>
+                study_hours = np.array([[1], [2], [3], [4], [5], [6]])<br>
+                <br>
+                # Зависимая переменная (оценки, баллы)<br>
+                scores = np.array([50, 55, 65, 70, 75, 85])<br>
+                <br>
+                # Создаем модель линейной регрессии<br>
+                model = LinearRegression()<br>
+                <br>
+                # Обучаем модель на данных (здесь есть пропуск)<br>
+                model.fit(study_hours, __________)<br>
+                <br>
+                # Делаем прогноз (оценка при 7 часах на учебу)<br>
+                predicted_score = model.__________(np.array([[7]]))<br>
+                <br>
+                # Выводим предсказанную оценку (здесь есть пропуск)<br>
+                print("Прогнозируемая оценка:", __________)<br>
+                </p>
+            </div>
+            <textarea name="task1" placeholder="Введите ваш ответ здесь..."></textarea>
+        </div>
+
+        <h2>Практическое задание 2</h2>
+        <div class="task">
+            <div class="instructions">
+                <p># Импортируем необходимые библиотеки<br>
+                from sklearn.linear_model import LogisticRegression<br>
+                import numpy as np<br>
+                <br>
+                # Данные для обучения модели (время на учебу и результат экзамена)<br>
+                study_hours = np.array([[1], [2], [3], [4], [5], [6], [7]])<br>
+                passed_exam = np.array([0, 0, 0, 1, 1, 1, 1])  # 0 = не сдал, 1 = сдал<br>
+                <br>
+                # Создаем модель логистической регрессии<br>
+                model = LogisticRegression()<br>
+                <br>
+                # Обучаем модель на данных (здесь есть пропуск)<br>
+                model.fit(__________, passed_exam)<br>
+                <br>
+                # Делаем прогноз (сдал или не сдал при 8 часах на учебу)<br>
+                predicted_result = model.predict(__________)<br>
+                <br>
+                # Выводим предсказанный результат<br>
+                print("Прогнозируемый результат:", predicted_result)<br>
+                </p>
+            </div>
+            <textarea name="task2" placeholder="Введите ваш ответ здесь..."></textarea>
+        </div>
+
+        <h2>Практическое задание 3</h2>
+        <div class="task">
+            <div class="instructions">
+                <p>import cv2<br>____________<br>
+                import matplotlib.pyplot as plt<br>
+                <br>
+                # Загружаем изображение в оттенках серого<br>
+                image = cv2.imread('________', cv2.IMREAD_GRAYSCALE)<br>
+                <br>
+                # Применяем фильтр Собеля для нахождения краев по горизонтали и вертикали<br>
+                sobel_x = cv2.Sobel(image, cv2.CV_64F, 1, 0, ksize=5)<br>
+                sobel_y = cv2.Sobel(image, cv2.CV_64F, 0, 1, ksize=5)<br>
+                <br>
+                # Соединяем горизонтальные и вертикальные грани<br>
+                sobel_combined = np.sqrt(sobel_x**2 + sobel_y**2)<br>
+                <br>
+                # Отображаем оригинальное изображение и результат<br>
+                plt.figure(figsize=(10, 10))<br>
+                <br>
+                plt.subplot(1, 3, 1)<br>
+                plt.title('Оригинал')<br>
+                plt.imshow(image, cmap='gray')<br>
+                <br>
+                plt.subplot(1, 3, 2)<br>
+                plt.title('Собель X')<br>
+                plt.imshow(sobel_x, cmap='gray')<br>
+                <br>
+                plt.subplot(1, 3, 3)<br>
+                plt.title('Собель Y')<br>
+                plt.imshow(_____, cmap='gray')<br>
+                <br>
+                plt.figure()<br>
+                plt.title('Комбинированный фильтр Собеля')<br>
+                plt.imshow(sobel_combined, cmap='gray')<br>
+                plt.show()<br>
+                </p>
+            </div>
+            <textarea name="task3" placeholder="Введите ваш ответ здесь..."></textarea>
+        </div>
+
+        
+        <button type="button" onclick="submitForm()">Отправить ответы</button>
+    </form>
+
+  
+   <div id="results" style="display: none; text-align: center; margin-top: 20px;">
+    <h2>Ваш результат</h2>
+    <p id="testScore"></p>
+    <p id="practicalScore"></p>
+    <p id="totalScore"></p>
+</div>
+
+<!-- Результаты -->
+<div id="results" style="display: none; text-align: center; margin-top: 20px;">
+    <h2>Ваш результат</h2>
+    <p id="score"></p>
+</div>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyBcDKsrAosMmOm0bBYX_S1RKaMNc-NaHow",
+        authDomain: "answers-63e2f.firebaseapp.com",
+        databaseURL: "https://answers-63e2f-default-rtdb.firebaseio.com",
+        projectId: "answers-63e2f",
+        storageBucket: "answers-63e2f.firebasestorage.app",
+        messagingSenderId: "591324937083",
+        appId: "1:591324937083:web:66f3694726b43f9b239bde",
+        measurementId: "G-X8ZP4RPK6C"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    let timer;
+    let timeLeft = 2 * 60 * 60;
+
+    const correctAnswers = {
+        question1: "a", question2: "b", question3: "a", question4: "b",
+        question5: "a", question6: "b", question7: "a", question8: "a",
+        question9: "a", question10: "a", question11: "a", question12: "a",
+        question13: "a", question14: "a", question15: "a", question16: "a",
+        question17: "a", question18: "a", question19: "a", question20: "a",
+        question21: "a", question22: "a", question23: "a", question24: "a",
+        question26: "a", question27: "a", question28: "a", question29: "a",
+        question30: "a"
+    };
+
+    const correctTaskAnswers = {
+        task1: "model.fit(study_hours, scores)\npredicted_score = model.predict(np.array([[7]]))\nprint('Прогнозируемая оценка:', predicted_score)",
+        task2: "model.fit(study_hours, passed_exam)\npredicted_result = model.predict(np.array([[8]]))\nprint('Прогнозируемый результат:', predicted_result)",
+        task3: "import numpy as np\nimage = cv2.imread('image.jpg', cv2.IMREAD_GRAYSCALE)\nplt.imshow(sobel_y, cmap='gray')"
+    };
+
+    function updateTimer() {
+        const hours = Math.floor(timeLeft / 3600);
+        const minutes = Math.floor((timeLeft % 3600) / 60);
+        const seconds = timeLeft % 60;
+        document.getElementById('timer').textContent = 
+            `Время: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            alert("Время истекло! Ответы будут автоматически отправлены.");
+            submitForm();
+        }
+        timeLeft--;
+    }
+
+    function startExam() {
+        document.getElementById("startButton").style.display = "none";
+        document.getElementById("examForm").style.display = "block";
+        timer = setInterval(updateTimer, 1000);
+    }
+
+    function calculateScore(answers, taskAnswers) {
+        let score = 0;
+        let taskScore = 0;
+
+      
+        for (let question in correctAnswers) {
+            if (answers[question] === correctAnswers[question]) {
+                score++;
+            }
+        }
+
+      
+        for (let task in correctTaskAnswers) {
+            if (taskAnswers[task] && taskAnswers[task].trim() === correctTaskAnswers[task].trim()) {
+                taskScore++;
+            }
+        }
+
+        return { score, taskScore };
+    }
+
+    function submitForm() {
+        clearInterval(timer);
+
+        const form = document.getElementById("examForm");
+        const formData = new FormData(form);
+
+        const data = {
+            studentName: formData.get("studentName"),
+            task1: formData.get("task1"),
+            task2: formData.get("task2"),
+            task3: formData.get("task3")
+        };
+
+        for (let i = 1; i <= 30; i++) {
+            data[`question${i}`] = formData.get(`question${i}`);
+        }
+
+        const { score, taskScore } = calculateScore(data, {
+            task1: formData.get("task1"),
+            task2: formData.get("task2"),
+            task3: formData.get("task3")
+        });
+        const testScore = (score * 0.3).toFixed(1);
+        const totalScore = (parseFloat(testScore) + taskScore).toFixed(1);
+
+       
+        database.ref('answers').push(data)
+            .then(() => {
+                alert("Данные успешно отправлены!");
+
+                // Показ результата
+                form.reset();
+                document.getElementById("examForm").style.display = "none";
+                document.getElementById("results").style.display = "block";
+                document.getElementById("testScore").textContent = `Баллы за тест: ${testScore} из 9`;
+                document.getElementById("practicalScore").textContent = `Баллы за практические задания: ${taskScore} из 3`;
+                document.getElementById("totalScore").textContent = `Итоговый балл: ${totalScore} из 12`;
+            })
+            .catch(error => {
+                console.error("Ошибка при отправке данных:", error);
+            });
+    }
+</script>
+</body>
+</html>
